@@ -151,7 +151,7 @@ DummyCommand(parameters = "")
 ;==========================================================
 ; Hotkey to launch the Command Picker window.
 ;==========================================================
-CapsLock::
+^+/::
 	SetCapslockState, Off				; Turn CapsLock off after it was pressed
 	CPLaunchCommandPicker()	
 return
@@ -201,6 +201,13 @@ PgUp::CPForwardKeyPressToListBox("PgUp") return
 PgDn::CPForwardKeyPressToListBox("PgDn") return
 ^Home::CPForwardKeyPressToListBox("Home") return	; Ctrl+Home to jump to top of list.
 ^End::CPForwardKeyPressToListBox("End") return		; Ctrl+End to jump to bottom of list.
+
+;========================
+; Evil Keybindings
+;========================
+$^j::CPForwardKeyPressToListBox("Down") return
+$^k::CPForwardKeyPressToListBox("Up") return
+$^l::CPForwardKeyPressToListBox("Enter") return
 
 CPForwardKeyPressToListBox(key = "Down")
 {
