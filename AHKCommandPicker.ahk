@@ -120,19 +120,19 @@ CPSaveSettings()
 ;==========================================================
 ; Add a Dummy command to use for debugging.
 ;==========================================================
-AddNamedCommand("Dummy Command", "DummyCommand", "A command that doesn't do anything, but can be useful for testing and debugging", "Parameter1Name|Parameter1Value, Parameter2Value,Param3Name|Param3Value,Param4Value")
-DummyCommand(parameters = "")
-{
-	; Example of how to check if parameters were provided.
-	if (parameters != "")
-		MsgBox, Parameters were provided!
+; AddNamedCommand("Dummy Command", "DummyCommand", "A command that doesn't do anything, but can be useful for testing and debugging", "Parameter1Name|Parameter1Value, Parameter2Value,Param3Name|Param3Value,Param4Value")
+; DummyCommand(parameters = "")
+; {
+; 	; Example of how to check if parameters were provided.
+; 	if (parameters != "")
+; 		MsgBox, Parameters were provided!
 	
-	; Example of how to loop through the parameters
-	Loop, Parse, parameters, CSV
-		MsgBox Item %A_Index% is '%A_LoopField%'
+; 	; Example of how to loop through the parameters
+; 	Loop, Parse, parameters, CSV
+; 		MsgBox Item %A_Index% is '%A_LoopField%'
 	
-	return, "This is some text returned by the dummy command."
-}
+; 	return, "This is some text returned by the dummy command."
+; }
 
 ;==========================================================
 ; Inserts the scripts containing the commands (i.e. string + function) to run.
