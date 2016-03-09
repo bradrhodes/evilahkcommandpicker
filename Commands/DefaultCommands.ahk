@@ -22,11 +22,11 @@ ExitAHKScript()
 	ExitApp
 }
 
-AddCommand("PauseAHKScript", "Pauses this AutoHotKey script")
-PauseAHKScript()
-{
-	Pause
-}
+; AddCommand("PauseAHKScript", "Pauses this AutoHotKey script")
+; PauseAHKScript()
+; {
+; 	Pause
+; }
 
 AddCommand("PCShutdown", "Turns the computer off")
 PCShutdown()
@@ -40,208 +40,208 @@ PCRestart()
 	Run, shutdown.exe -r -t 00
 }
 
-AddCommand("eMyComputer", "Explore My Computer")
-eMyComputer()
-{ 
-	Run, ::{20d04fe0-3aea-1069-a2d8-08002b30309d}  ; Opens the "My Computer" folder.
-}
+; AddCommand("eMyComputer", "Explore My Computer")
+; eMyComputer()
+; { 
+; 	Run, ::{20d04fe0-3aea-1069-a2d8-08002b30309d}  ; Opens the "My Computer" folder.
+; }
 
-AddCommand("eRecycleBin", "Explore the Recycle Bin")
-eRecycleBin()
-{ 
-	Run, ::{645ff040-5081-101b-9f08-00aa002f954e}  ; Opens the Recycle Bin.
-}
+; AddCommand("eRecycleBin", "Explore the Recycle Bin")
+; eRecycleBin()
+; { 
+; 	Run, ::{645ff040-5081-101b-9f08-00aa002f954e}  ; Opens the Recycle Bin.
+; }
 
-AddCommand("eC", "Explore C:\")
-eC()
-{
-	Run, explore C:\
-}
+; AddCommand("eC", "Explore C:\")
+; eC()
+; {
+; 	Run, explore C:\
+; }
 
-AddCommand("OpenClipboard", "Opens whatever file/folder/url path is in the Clipboard, if it is valid")
-OpenClipboard()
-{
-	; Trim any whitespace, tabs, single-quotes and double-quotes off of the clipboard text before processing it.
-	clipboardText := Trim(clipboard, " `t`'`"`"")
+; AddCommand("OpenClipboard", "Opens whatever file/folder/url path is in the Clipboard, if it is valid")
+; OpenClipboard()
+; {
+; 	; Trim any whitespace, tabs, single-quotes and double-quotes off of the clipboard text before processing it.
+; 	clipboardText := Trim(clipboard, " `t`'`"`"")
 	
-	; If the file/folder path exists, open it.
-	IfExist, %clipboardText%
-	{
-		Run, %clipboardText%
-	}
-	else
-	{
-		; Determine if the clipboard contains a URL.
-		urlRegex := "((https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\))+[\w\d:#@%/;$()~_?\+-=\\\.&]*)"
-		foundPosition := RegExMatch(clipboardText, urlRegex)
+; 	; If the file/folder path exists, open it.
+; 	IfExist, %clipboardText%
+; 	{
+; 		Run, %clipboardText%
+; 	}
+; 	else
+; 	{
+; 		; Determine if the clipboard contains a URL.
+; 		urlRegex := "((https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\))+[\w\d:#@%/;$()~_?\+-=\\\.&]*)"
+; 		foundPosition := RegExMatch(clipboardText, urlRegex)
 		
-		; If the start of the clipboard is a URL, open it.
-		if (foundPosition = 1)
-			Run, %clipboardText%
-		; Else this is not a file/folder path or a URL, so return error.
-		else
-		{
-			return, "PATH DOES NOT EXIST:`r`n" . clipboardText
-		}
-	}
-}
+; 		; If the start of the clipboard is a URL, open it.
+; 		if (foundPosition = 1)
+; 			Run, %clipboardText%
+; 		; Else this is not a file/folder path or a URL, so return error.
+; 		else
+; 		{
+; 			return, "PATH DOES NOT EXIST:`r`n" . clipboardText
+; 		}
+; 	}
+; }
 
-AddCommand("NewEmail", "Opens a new email in the default email program")
-NewEmail()
-{
-	Run, mailto:
-}
+; AddCommand("NewEmail", "Opens a new email in the default email program")
+; NewEmail()
+; {
+; 	Run, mailto:
+; }
 
-AddCommand("WindowClose", "Closes the currently active window")
-WindowClose()
-{	global _cpActiveWindowID
-	WinClose, ahk_id %_cpActiveWindowID%
-}
+; AddCommand("WindowClose", "Closes the currently active window")
+; WindowClose()
+; {	global _cpActiveWindowID
+; 	WinClose, ahk_id %_cpActiveWindowID%
+; }
 
-AddNamedCommand("WindowCloseAll", "CloseAllWindows", "Closes all open windows")
-CloseAllWindows()
-{
-	MatchList = AutoHotKey Help, Any Other Window Names To Leave Open
+; AddNamedCommand("WindowCloseAll", "CloseAllWindows", "Closes all open windows")
+; CloseAllWindows()
+; {
+; 	MatchList = AutoHotKey Help, Any Other Window Names To Leave Open
 
-	WinGet, ID, List, , , Program Manager
-	Loop, %ID%
-	{
-		StringTrimRight, This_ID, ID%A_Index%, 0
-		WinGetTitle, This_Title, ahk_id %This_ID%
-		If This_Title in %MatchList%
-			Continue
-		WinClose, %This_Title%
-	}
-}
+; 	WinGet, ID, List, , , Program Manager
+; 	Loop, %ID%
+; 	{
+; 		StringTrimRight, This_ID, ID%A_Index%, 0
+; 		WinGetTitle, This_Title, ahk_id %This_ID%
+; 		If This_Title in %MatchList%
+; 			Continue
+; 		WinClose, %This_Title%
+; 	}
+; }
 
-AddCommand("WindowMinimize", "Minimizes the currently active window")
-WindowMinimize()
-{	global _cpActiveWindowID
-	WinMinimize, ahk_id %_cpActiveWindowID%
-}
+; AddCommand("WindowMinimize", "Minimizes the currently active window")
+; WindowMinimize()
+; {	global _cpActiveWindowID
+; 	WinMinimize, ahk_id %_cpActiveWindowID%
+; }
 
-AddCommand("WindowMaximize", "Maximizes the currently active window")
-WindowMaximize()
-{	global _cpActiveWindowID
-	WinMaximize, ahk_id %_cpActiveWindowID%
-}
+; AddCommand("WindowMaximize", "Maximizes the currently active window")
+; WindowMaximize()
+; {	global _cpActiveWindowID
+; 	WinMaximize, ahk_id %_cpActiveWindowID%
+; }
 
-AddCommand("WindowAlwaysOnTop", "Sets the active window to always be on top of others")
-WindowAlwaysOnTop()
-{	global _cpActiveWindowID
-	WinSet, AlwaysOnTop, On, ahk_id %_cpActiveWindowID%
-}
+; AddCommand("WindowAlwaysOnTop", "Sets the active window to always be on top of others")
+; WindowAlwaysOnTop()
+; {	global _cpActiveWindowID
+; 	WinSet, AlwaysOnTop, On, ahk_id %_cpActiveWindowID%
+; }
 
-AddCommand("WindowNotAlwaysOnTop", "Sets the active window to no longer always be on top of others")
-WindowNotAlwaysOnTop()
-{	global _cpActiveWindowID
-	WinSet, AlwaysOnTop, Off, ahk_id %_cpActiveWindowID%
-}
+; AddCommand("WindowNotAlwaysOnTop", "Sets the active window to no longer always be on top of others")
+; WindowNotAlwaysOnTop()
+; {	global _cpActiveWindowID
+; 	WinSet, AlwaysOnTop, Off, ahk_id %_cpActiveWindowID%
+; }
 
-AddCommand("Outlook", "Opens Outlook making sure it is maximized")
-Outlook()
-{	
-	outlookExecutablePath := GetOutlookExecutablePath()
+; AddCommand("Outlook", "Opens Outlook making sure it is maximized")
+; Outlook()
+; {	
+; 	outlookExecutablePath := GetOutlookExecutablePath()
 	
-	; Look for Outlook 2013.
-	windowID := PutWindowInFocus("- Outlook", outlookExecutablePath . " /recycle", 2)
+; 	; Look for Outlook 2013.
+; 	windowID := PutWindowInFocus("- Outlook", outlookExecutablePath . " /recycle", 2)
 	
-	; If not found, try looking for Outlook 2010.
-	if (windowID < 1)
-		windowID := PutWindowInFocus("Microsoft Outlook", outlookExecutablePath . " /recycle", 2)
+; 	; If not found, try looking for Outlook 2010.
+; 	if (windowID < 1)
+; 		windowID := PutWindowInFocus("Microsoft Outlook", outlookExecutablePath . " /recycle", 2)
 	
-	; If not found, try looking for any version of Outlook.
-	if (windowID < 1)
-		windowID := PutWindowInFocus("Outlook", outlookExecutablePath . " /recycle", 2)
+; 	; If not found, try looking for any version of Outlook.
+; 	if (windowID < 1)
+; 		windowID := PutWindowInFocus("Outlook", outlookExecutablePath . " /recycle", 2)
 	
-	; If we have a handle to the Outlook window, make sure it is maximized.
-	if (windowID > 0)
-	{
-		; Maximize the window if it is not already maximized.
-		WinGet, maximized, MinMax, ahk_id %windowID%
-		if (maximized != 1)
-		{
-			WinMaximize, ahk_id %windowID%
-		}
-	}
-}
+; 	; If we have a handle to the Outlook window, make sure it is maximized.
+; 	if (windowID > 0)
+; 	{
+; 		; Maximize the window if it is not already maximized.
+; 		WinGet, maximized, MinMax, ahk_id %windowID%
+; 		if (maximized != 1)
+; 		{
+; 			WinMaximize, ahk_id %windowID%
+; 		}
+; 	}
+; }
 
-AddCommand("OutlookAppointment", "Creates a new Appointment in Outlook")
-OutlookAppointment()
-{	
-	outlookExecutablePath := GetOutlookExecutablePath()
-	Run, "%outlookExecutablePath%" /recycle /c ipm.appointment
-}
+; AddCommand("OutlookAppointment", "Creates a new Appointment in Outlook")
+; OutlookAppointment()
+; {	
+; 	outlookExecutablePath := GetOutlookExecutablePath()
+; 	Run, "%outlookExecutablePath%" /recycle /c ipm.appointment
+; }
 
-GetOutlookExecutablePath()
-{	global _Outlook2002ExecutablePath, _Outlook2003ExecutablePath, _Outlook2007ExecutablePath, _Outlook2010ExecutablePath, _Outlook2013ExecutablePath
-	IfExist, %_Outlook2002ExecutablePath%
-		outlookExecutablePath := _Outlook2002ExecutablePath
-	IfExist, %_Outlook2003ExecutablePath%
-		outlookExecutablePath := _Outlook2003ExecutablePath
-	IfExist, %_Outlook2007ExecutablePath%
-		outlookExecutablePath := _Outlook2007ExecutablePath
-	IfExist, %_Outlook2010ExecutablePath%
-		outlookExecutablePath := _Outlook2010ExecutablePath
-	IfExist, %_Outlook2013ExecutablePath%
-		outlookExecutablePath := _Outlook2013ExecutablePath
-	return %outlookExecutablePath%
-}
+; GetOutlookExecutablePath()
+; {	global _Outlook2002ExecutablePath, _Outlook2003ExecutablePath, _Outlook2007ExecutablePath, _Outlook2010ExecutablePath, _Outlook2013ExecutablePath
+; 	IfExist, %_Outlook2002ExecutablePath%
+; 		outlookExecutablePath := _Outlook2002ExecutablePath
+; 	IfExist, %_Outlook2003ExecutablePath%
+; 		outlookExecutablePath := _Outlook2003ExecutablePath
+; 	IfExist, %_Outlook2007ExecutablePath%
+; 		outlookExecutablePath := _Outlook2007ExecutablePath
+; 	IfExist, %_Outlook2010ExecutablePath%
+; 		outlookExecutablePath := _Outlook2010ExecutablePath
+; 	IfExist, %_Outlook2013ExecutablePath%
+; 		outlookExecutablePath := _Outlook2013ExecutablePath
+; 	return %outlookExecutablePath%
+; }
 
-AddCommand("ContextMenu", "Simulates a right-click by using Shift+F10")
-ContextMenu()
-{
-	SendInput, +{F10}	; Shift + F10 to simulate right mouse click
-}
+; AddCommand("ContextMenu", "Simulates a right-click by using Shift+F10")
+; ContextMenu()
+; {
+; 	SendInput, +{F10}	; Shift + F10 to simulate right mouse click
+; }
 
-AddCommand("WebBrowser", "Opens the default internet browser and searches for any comma-separated queries")
-WebBrowser(queries = "")
-{
-	; If queries were supplied, run them.
-	if (queries != "")
-		querySupplied := DoWebSearch(queries)
-	; Otherwise the user didn't supply a query, so just open the browser up to Google.
-	else
-		Run, www.google.com
-}
+; AddCommand("WebBrowser", "Opens the default internet browser and searches for any comma-separated queries")
+; WebBrowser(queries = "")
+; {
+; 	; If queries were supplied, run them.
+; 	if (queries != "")
+; 		querySupplied := DoWebSearch(queries)
+; 	; Otherwise the user didn't supply a query, so just open the browser up to Google.
+; 	else
+; 		Run, www.google.com
+; }
 
-; Sends each of the supplied queries to the default web browser and returns if any queries were supplied or not (true/false).
-DoWebSearch(queries = "")
-{
-	; Loop through each of the terms to search for.
-	Loop, Parse, queries, CSV
-	{
-		query := A_LoopField
+; ; Sends each of the supplied queries to the default web browser and returns if any queries were supplied or not (true/false).
+; DoWebSearch(queries = "")
+; {
+; 	; Loop through each of the terms to search for.
+; 	Loop, Parse, queries, CSV
+; 	{
+; 		query := A_LoopField
 		
-		; If this query is actually a URL, just go to the URL directly.
-		if (RegExMatch(query, "^(https?://|www\.)|([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?)$"))
-		{
-			address := query
-		}
-		; Else the query is not a URL, so Google it.
-		else
-		{		
-			; If the query starts with a "1", then do an "I'm feeling lucky" search.
-			firstChar := SubStr(query, 1, 1)
-			imFeelingLucky := false
-			if (firstChar = 1)
-			{
-				StringTrimLeft, query, query, 1
-				imFeelingLucky = true
-			}
+; 		; If this query is actually a URL, just go to the URL directly.
+; 		if (RegExMatch(query, "^(https?://|www\.)|([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?)$"))
+; 		{
+; 			address := query
+; 		}
+; 		; Else the query is not a URL, so Google it.
+; 		else
+; 		{		
+; 			; If the query starts with a "1", then do an "I'm feeling lucky" search.
+; 			firstChar := SubStr(query, 1, 1)
+; 			imFeelingLucky := false
+; 			if (firstChar = 1)
+; 			{
+; 				StringTrimLeft, query, query, 1
+; 				imFeelingLucky = true
+; 			}
 			
-			; Construct the address and then go to.
-			address = www.google.ca/search?q=%query%
+; 			; Construct the address and then go to.
+; 			address = www.google.ca/search?q=%query%
 			
-			; If we should use the I'm Feeling Lucky, enable it.
-			if (imFeelingLucky)
-				address .= "&btnI=745"	; Adding &btnI=745 to the end of the URL uses Google's I'm Feeling Lucky.
-		}
+; 			; If we should use the I'm Feeling Lucky, enable it.
+; 			if (imFeelingLucky)
+; 				address .= "&btnI=745"	; Adding &btnI=745 to the end of the URL uses Google's I'm Feeling Lucky.
+; 		}
 		
-		; Open up the address in a new tab.
-		Run, %address%
-	}
-}
+; 		; Open up the address in a new tab.
+; 		Run, %address%
+; 	}
+; }
 
 AddCommand("MonitorOff", "Turns the monitor off")
 MonitorOff()
@@ -257,35 +257,35 @@ MuteSpeakersToggle()
 	SendInput, {Volume_Mute}
 }
 
-AddCommand("MediaNext", "Moves to the next track")
-MediaNext()
-{
-	SendInput, {Media_Next}
-}
+; AddCommand("MediaNext", "Moves to the next track")
+; MediaNext()
+; {
+; 	SendInput, {Media_Next}
+; }
 
-AddCommand("MediaPrevious", "Moves to the previous track")
-MediaPrevious()
-{
-	SendInput, {Media_Prev}
-}
+; AddCommand("MediaPrevious", "Moves to the previous track")
+; MediaPrevious()
+; {
+; 	SendInput, {Media_Prev}
+; }
 
-AddCommand("MediaPlayPause", "Plays/Pauses the current track")
-MediaPlayPause()
-{
-	SendInput, {Media_Play_Pause}
-}
+; AddCommand("MediaPlayPause", "Plays/Pauses the current track")
+; MediaPlayPause()
+; {
+; 	SendInput, {Media_Play_Pause}
+; }
 
-AddCommand("MediaStop", "Stops the current track from playing")
-MediaStop()
-{
-	SendInput, {Media_Stop}
-}
+; AddCommand("MediaStop", "Stops the current track from playing")
+; MediaStop()
+; {
+; 	SendInput, {Media_Stop}
+; }
 
-AddCommand("ShowClipboardText", "Shows the text that is currently in the clipboard. Parameter specifies how many seconds before auto-closing it.", "3 seconds|3")
-ShowClipboardText(displayLengthInSeconds = 0)
-{
-	MsgBox, , Clipboard Text (other content such as images are not shown here), %Clipboard%, %displayLengthInSeconds%
-}
+; AddCommand("ShowClipboardText", "Shows the text that is currently in the clipboard. Parameter specifies how many seconds before auto-closing it.", "3 seconds|3")
+; ShowClipboardText(displayLengthInSeconds = 0)
+; {
+; 	MsgBox, , Clipboard Text (other content such as images are not shown here), %Clipboard%, %displayLengthInSeconds%
+; }
 
 AddCommand("URLShortenAndPaste", "Replaces the long URL in the clipboard with a shortened one and pastes it")
 URLShortenAndPaste()
