@@ -152,7 +152,7 @@ CPSaveSettings()
 ; Hotkey to launch the Command Picker window.
 ;==========================================================
 ^+/::
-	SetCapslockState, Off				; Turn CapsLock off after it was pressed
+	; SetCapslockState, Off				; Turn CapsLock off after it was pressed
 	CPLaunchCommandPicker()	
 return
 
