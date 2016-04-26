@@ -17,7 +17,46 @@ AddCommand("EditMyHotkeys", "Opens the MyHotkeys.ahk script for editing in the d
 EditMyHotkeys()
 {
 	filePath = %A_ScriptDir%\Commands\MyHotkeys.ahk
-	Run, edit %filePath%,,UseErrorLevel
+  Run, edit %filePath%,,UseErrorLevel
 	if (%ErrorLevel% = ERROR)
 		Run, "notepad" "%filePath%"
 }
+
+AddCommand("DisableTouchpad", "Disables the touchpad.")
+DisableTouchpad()
+{
+  Run %A_WinDir%\system32\control.exe main.cpl ; Open Mouse Properties
+
+  Sleep 500
+
+  if WinExist("Mouse Properties")
+  {
+    Send, ^+{TAB} ; Ctrl+Shift+Tab jumps to the last tab
+    Sleep 200
+    Control, ChooseString, Use TrackPoint Only, ComboBox1, Mouse Properties
+    ControlClick, Button21
+  }
+}
+
+AddCommand("EnableTouchpad", "Disables the touchpad.")
+EnableTouchpad()
+{
+  Run %A_WinDir%\system32\control.exe main.cpl ; Open Mouse Properties
+
+  Sleep 500
+
+  if WinExist("Mouse Properties")
+  {
+    Send, ^+{TAB} ; Ctrl+Shift+Tab jumps to the last tab
+    Sleep 200
+    Control, ChooseString, Use TouchPad and TrackPoint, ComboBox1
+    ControlClick, Button21
+  }
+}
+
+; ===============================
+; Ideas:
+;   - Commands that can switch to different keyboard modes
+;     - basically have all the modes available in the Ultimate Hacker Keyboard and also a 'normal' or 'default' mode
+;   - 
+; ===============================
